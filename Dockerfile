@@ -6,9 +6,9 @@ FROM ubuntu:14.04
 #RUN apt install curl gnupg2 ca-certificates lsb-release -y
 #RUN apt install nginx -y
 
-apt-get update -y
-apt-get upgrade -y
-apt-get install -y bzip2 libcanberra-gtk-module libxss1 sed tar libxtst6 libnss3 wget psmisc bc libgtk-3-0 libgbm-dev libatspi2.0-0 libatomic1 lsb-release -y
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install -y bzip2 libcanberra-gtk-module libxss1 sed tar libxtst6 libnss3 wget psmisc bc libgtk-3-0 libgbm-dev libatspi2.0-0 libatomic1 lsb-release -y
 RUN apt install nginx -y
 
 #RUN rm /etc/nginx/conf.d/default.conf

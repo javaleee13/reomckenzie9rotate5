@@ -1,19 +1,14 @@
 
-FROM ubuntu:14.04
-
-#RUN apt update -y
-#RUN apt upgrade -y
-#RUN apt install curl gnupg2 ca-certificates lsb-release -y
-#RUN apt install nginx -y
+FROM mauros5/9hits_autoinstall:latest
 
 RUN apt update -y
 RUN apt upgrade -y
-RUN apt install -y bzip2 libcanberra-gtk-module libxss1 sed tar libxtst6 libnss3 wget psmisc bc libgtk-3-0 libgbm-dev libatspi2.0-0 libatomic1 lsb-release -y
+#RUN apt install curl gnupg2 ca-certificates lsb-release -y
 RUN apt install nginx -y
 
-#RUN rm /etc/nginx/conf.d/default.conf
+RUN rm /etc/nginx/sites-available/default
 
-#COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY default /etc/nginx/sites-available/default
 
+CMD service nginx start && cd /root/9Hits/ && echo token=7331cfb2434fe46b67d3681eeb1b1691 > parameters && echo sessions=10 >> parameters && echo maxcpu=2 >> parameters && echo exProxyServer= >> parameters && echo restart=2 >> parameters && echo name=wwww1 >> parameters && echo url=https://www.dropbox.com/s/usku8rcyysk9664/9hits-linux-x64-2.5.2.tar.bz2 >> parameters && echo allowAdult=allow >> parameters && echo allowPopups=allow >> parameters && echo allowMining=deny >> parameters && /root/9Hits/recreate.sh && /usr/sbin/cron -f
 
-CMD service nginx start && yum -y update || apt update && yum -y install git whiptail || apt install -y git whiptail && cd /root && git clone https://github.com/MauroS5/9Hits-AutoInstall.git && chmod -R 777 9Hits-AutoInstall && 9Hits-AutoInstall/install.sh "2" "7331cfb2434fe46b67d3681eeb1b1691" "10" "1" "3" "2" "wwww1" "" "https://www.dropbox.com/s/usku8rcyysk9664/9hits-linux-x64-2.5.2.tar.bz2"

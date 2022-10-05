@@ -1,14 +1,11 @@
+FROM nginx:latest
 
-FROM mauros5/9hits_autoinstall:latest
+RUN rm /etc/nginx/conf.d/default.conf
 
-RUN apt update -y
-RUN apt upgrade -y
-#RUN apt install curl gnupg2 ca-certificates lsb-release -y
-RUN apt install nginx -y
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-#RUN rm /etc/nginx/sites-available/default
-
-#COPY default /etc/nginx/sites-available/default
-
-CMD service nginx start && cd /root/9Hits/ && echo token=7331cfb2434fe46b67d3681eeb1b1691 > parameters && echo sessions=10 >> parameters && echo maxcpu=2 >> parameters && echo exProxyServer= >> parameters && echo restart=2 >> parameters && echo name=wwww12 >> parameters && echo url=https://www.dropbox.com/s/usku8rcyysk9664/9hits-linux-x64-2.5.2.tar.bz2 >> parameters && echo allowAdult=allow >> parameters && echo allowPopups=allow >> parameters && echo allowMining=deny >> parameters && /root/9Hits/recreate.sh && /usr/sbin/cron -f
+COPY index.html /usr/share/nginx/html
+#COPY te.gif /usr/share/nginx/html
+COPY ads.html /usr/share/nginx/html
+COPY mediacpmpl460988e5dbf283acf402631f5bc639ac.txt /usr/share/nginx/html
 
